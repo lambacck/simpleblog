@@ -8,6 +8,15 @@ class Post(TimeStampedModel, models.Model):
     slug = models.SlugField(unique_for_date='pub_date')
     body = models.TextField()
 
+    @models.permalink
+    def get_absolute_url(self):
+        pub_date = self.pub_date
+        url_data = {
+            'slug': self.slug,
+            'date': pub_date.isoformat(),
+        }
+        return ('post_detail', (), url_data)
+
 
 class Comment(TimeStampedModel, models.Model):
     post = models.ForeignKey(Post)

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Super Simple Blog{% endblock %}
+{% block page_title %}Super Simple Blog{% endblock %}
+{% block content %}
+    {% if post_list %}
+        {% for post in post_list %}
+        <article class="blog-post">
+            <h3><a href="{( post.get_absolute_url }}/">{{ post.title }}</a></h3>
+            <div class="pub-date">{{ post.pub_date }}</div>
+            <div class="post-body">
+                {{ post.body }}
+            </div>
+        </article>
+        {% endfor %}
+    {% else %}
+        <p>No posts are available.</p>
+    {% endif %}
+{% endblock %}

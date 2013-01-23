@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load gravatar %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block page_title %}{{ post.title }}{% endblock %}
+{% block content %}
+    <article class="blog-post">
+        <h3><a href="{{ post.get_absolute_url }}/">{{ post.title }}</a></h3>
+        <div class="pub-date">{{ post.pub_date }}</div>
+        <div class="post-body">
+            {{ post.body }}
+        </div>
+    </article>
+    <div class="comments">
+        {% for comment in post.comment_set.all %}
+        <div class="comment">
+            <div class="comment-submitter">
+            {% gravatar comment.email %}
+            <br>{{ comment.name }}
+            </div>
+            <div class="comment-body">
+                {{ comment.body }}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
