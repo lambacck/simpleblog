@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     ),
 
     url(
-        regex=r'^(?P<date>\d{4}-\d{2}-\d{2})/(?P<slug>[-\w]+)$',
-        view=views.PostDetailView,
-        name='blog_post_details'
+        regex=r'^post/(?P<slug>[-\w]+)$',
+        view=views.PostDetailView.as_view(),
+        name='blog_post_detail'
     ),
 
 ) # NOQA

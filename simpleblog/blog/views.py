@@ -16,19 +16,14 @@ class PostCreateView(LoginRequiredMixin, PostActionMixin, CreateView):
     model = Post
     action = 'created'
 
-    template_name = 'blog/edit_post.html'
-
 
 class PostUpdateView(LoginRequiredMixin, PostActionMixin, UpdateView):
     model = Post
     action = 'updated'
 
-    template_name = 'blog/edit_post.html'
-
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'blog/post.html'
 
 
 class PostListView(ListView):
