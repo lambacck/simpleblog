@@ -41,12 +41,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="{% url blog_home %}">Super Simple Blog</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              {% if user.is_staff %}
+              <li class="active"><a href="{% url blog_post_new %}">Create Post</a></li>
+              {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -55,7 +55,6 @@
 
     <div class="container">
 
-      <h1>{% block page_title %}Example Base Template{% endblock page_title %}</h1>
       {% if messages %}
       <ul class="messages">
           {% for message in messages %}

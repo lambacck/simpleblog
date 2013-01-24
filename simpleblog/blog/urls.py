@@ -16,5 +16,15 @@ urlpatterns = patterns('',
         view=views.PostDetailView.as_view(),
         name='blog_post_detail'
     ),
+    url(
+        regex=r'^new$',
+        view=views.PostCreateView.as_view(),
+        name='blog_post_new'
+    ),
+    url(
+        regex=r'^edit/(?P<id>\d+)$$',
+        view=views.PostUpdateView.as_view(),
+        name='blog_post_edit'
+    )
 
 ) # NOQA

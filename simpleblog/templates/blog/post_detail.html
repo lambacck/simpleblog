@@ -3,15 +3,8 @@
 {% load gravatar %}
 
 {% block title %}{{ post.title }}{% endblock %}
-{% block page_title %}Simple Blog{% endblock %}
 {% block content %}
-    <article class="blog-post">
-        <h2 class='blog-post-title'>{{ post.title }}</h2>
-        <small class="pub-date">{{ post.pub_date }}</small>
-        <div class="post-body">
-            {{ post.body }}
-        </div>
-    </article>
+    {% include "blog/post.html" %}
     <div class="comments">
         {% for comment in post.comment_set.all %}
         <div class="comment">
