@@ -3,6 +3,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from braces.views import LoginRequiredMixin
 from .models import Post
+from .forms import PostForm
 
 
 class PostActionMixin(object):
@@ -13,11 +14,13 @@ class PostActionMixin(object):
 
 
 class PostCreateView(LoginRequiredMixin, PostActionMixin, CreateView):
+    form = PostForm
     model = Post
     action = 'created'
 
 
 class PostUpdateView(LoginRequiredMixin, PostActionMixin, UpdateView):
+    form = PostForm
     model = Post
     action = 'updated'
 

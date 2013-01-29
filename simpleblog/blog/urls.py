@@ -22,7 +22,7 @@ urlpatterns = patterns('',
         name='blog_post_new'
     ),
     url(
-        regex=r'^edit/(?P<id>\d+)$$',
+        regex=r'^edit/(?P<pk>\d+)$',
         view=views.PostUpdateView.as_view(),
         name='blog_post_edit'
     )

@@ -189,6 +189,7 @@ THIRD_PARTY_APPS = (
     # Database migration helpers:
     'south',
     'django_gravatar',
+    'crispy_forms',
 )
 
 # Apps specific for this project go here.
@@ -242,3 +243,5 @@ WSGI_APPLICATION = 'wsgi.application'
 ########## GRAVATAR CONFIGURATION
 GRAVATAR_DEFAULT_IMAGE = 'monsterid'
 ########## END GRAVATAR CONFIGURATION
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'

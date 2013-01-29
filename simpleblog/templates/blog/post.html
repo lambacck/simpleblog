@@ -3,7 +3,7 @@
     <h2 class='blog-post-title'><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
     <small class="pub-date">{{ post.pub_date }}
         {% if user.is_staff %}
-        | <a href="{% url blog_post_edit id=post.id %}">edit</a>
+        | <a href="{% url blog_post_edit pk=post.id %}">edit</a>
         {% endif %}
     </small>
     <div class="post-body">
