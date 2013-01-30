@@ -3,10 +3,10 @@ from model_utils.models import TimeStampedModel
 
 
 class Post(TimeStampedModel, models.Model):
-    pub_date = models.DateField()
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, verbose_name='Post Title')
     slug = models.SlugField(unique=True)
-    body = models.TextField()
+    pub_date = models.DateField(verbose_name='Publication Date')
+    body = models.TextField(verbose_name="Post Content")
 
     @models.permalink
     def get_absolute_url(self):
