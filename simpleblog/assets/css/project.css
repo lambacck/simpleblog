@@ -1,1 +1,16 @@
 /*! project specific CSS goes here. */
+.comment {
+    margin-bottom: 1em;
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+.comment-body {
+    margin-top: 0.5em;
+}
+
+.picture, .comment-details {
+    float: left;
+}
+
+.comment-details {
+    margin-left: 1em;
+}

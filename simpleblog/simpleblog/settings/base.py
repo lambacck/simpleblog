@@ -178,6 +178,7 @@ DJANGO_APPS = (
 
     # Useful template tags:
     'django.contrib.humanize',
+    'django.contrib.markup',
 
     # Admin panel and documentation:
     'django.contrib.admin',

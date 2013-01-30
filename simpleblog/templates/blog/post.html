@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load markup %}
 <article class="blog-post">
     <h2 class='blog-post-title'><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
     <small class="pub-date">{{ post.pub_date }}
@@ -7,7 +7,7 @@
         {% endif %}
     </small>
     <div class="post-body">
-        {{ post.body }}
+        {{ post.body|markdown:"safe" }}
     </div>
 </article>
 
