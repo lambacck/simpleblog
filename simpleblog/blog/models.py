@@ -19,6 +19,9 @@ class Post(TimeStampedModel, models.Model):
 class Comment(TimeStampedModel, models.Model):
     post = models.ForeignKey(Post)
 
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    body = models.TextField()
+    name = models.CharField(max_length=255, verbose_name='Your name')
+    email = models.EmailField(verbose_name='Email Address (only used for gravatar)')
+    body = models.TextField(verbose_name='Comment')
+
+    def get_absolute_url(self):
+        return self.post.get_absolute_url() + '#comment-%(id)d' % {'id': self.id}

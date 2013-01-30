@@ -1,0 +1,12 @@
+{% load bootstrap_tags %}
+<div class="comment" id="new-comment">
+    <h5>Add a new comment:</h5>
+    
+    <form action="{% url blog_comment_new %}" method="post">{% csrf_token %}
+        {{ form|as_bootstrap }}
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Post comment</button>
+        </div>
+    </form>
+</div>
+

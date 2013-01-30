@@ -25,6 +25,11 @@ urlpatterns = patterns('',
         regex=r'^edit/(?P<pk>\d+)$',
         view=views.PostUpdateView.as_view(),
         name='blog_post_edit'
-    )
+    ),
+    url(
+        regex=r'^newcomment$',
+        view=views.CommentCreateView.as_view(),
+        name='blog_comment_new'
+    ),
 
 ) # NOQA
