@@ -1,0 +1,15 @@
+{% load gravatar %}
+{% load humanize %}
+{% load markup %}
+
+<div class="comment" id="comment-{{ comment.id }}">
+    <div class="picture">
+    {% gravatar comment.email 50 %}
+    </div>
+    <div class="comment-details">
+        <div>{{ comment.name }} - <span title="{{ comment.created }}">{{ comment.created|naturaltime }}</span></div>
+        <div class="comment-body">{{ comment.body|markdown:"safe" }}</div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+

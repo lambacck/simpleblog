@@ -102,7 +102,10 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'compressor.finders.CompressorFinder',
 )
+COMPRESS_ROOT = normpath(join(SITE_ROOT, 'assets'))
 ########## END STATIC FILE CONFIGURATION
 
 
@@ -191,6 +194,7 @@ THIRD_PARTY_APPS = (
     'south',
     'django_gravatar',
     'django_forms_bootstrap',
+    "compressor",
 )
 
 # Apps specific for this project go here.

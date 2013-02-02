@@ -5,5 +5,6 @@ django-model-utils==1.1.0
 South==0.7.6
 psycopg2==2.4.6
 django-gravatar2==1.0.6
-django-forms-bootstrap==2.0.3
-python-markdown==2.2
+django-forms-bootstrap==2.0.3.post1
+Markdown==2.2
+django_compressor==1.1.2

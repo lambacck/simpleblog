@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% load gravatar %}
-{% load humanize %}
-{% load markup %}
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
@@ -9,16 +6,7 @@
     <h4>Comments:</h4>
     <div class="comments">
         {% for comment in comments %}
-        <div class="comment" id="comment-{{ comment.id }}">
-            <div class="picture">
-            {% gravatar comment.email 50 %}
-            </div>
-            <div class="comment-details">
-                <div>{{ comment.name }} - <span title="{{ comment.created }}">{{ comment.created|naturaltime }}</span></div>
-                <div class="comment-body">{{ comment.body|markdown:"safe" }}</div>
-            </div>
-            <div style="clear:both"></div>
-        </div>
+            {% include "blog/comment.html" with comment=comment %}
         {% endfor %}
         {% include "blog/new_comment_form.html" %}
     </div>

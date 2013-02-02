@@ -1,8 +1,12 @@
-from django import forms
+import json
+
+from django import forms, http
 from django.contrib import messages
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.template import Context, loader
 
 from braces.views import LoginRequiredMixin
+
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
@@ -54,4 +58,39 @@ class CommentCreateView(CreateView):
     def form_valid(self, form):
         msg = 'Thanks for your comment!'
         messages.info(self.request, msg)
-        return super(CommentCreateView, self).form_valid(form)
+
+        normal_retval = super(CommentCreateView, self).form_valid(form)
+
+        if self.request.POST.get('format', 'html') != 'json':
+            return normal_retval
+
+        t = loader.get_template('blog/comment.html')
+        context = Context(self.get_context_data())
+
+        return self.get_json_response(
+            json.dumps({
+                'success': True,
+                'messages': [{'message': m.message, 'tags': m.tags} for m in
+                             messages.get_messages(self.request)],
+                'comment': t.render(context)
+
+            })
+        )
+
+    def form_invalid(self, form):
+        normal_retval = super(CommentCreateView, self).form_invalid(form)
+        if self.request.POST.get('format', 'html') != 'json':
+            return normal_retval
+
+        return self.get_json_response(
+            json.dumps({
+                'success': False,
+                'errors': {k: v.as_ul() for k, v in form.errors.iteritems()}
+            })
+        )
+
+    def get_json_response(self, content, **httpresponse_kwargs):
+        "Construct an `HttpResponse` object."
+        return http.HttpResponse(content,
+                                 content_type='application/json',
+                                 **httpresponse_kwargs)
