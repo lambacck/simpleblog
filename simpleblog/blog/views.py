@@ -26,8 +26,9 @@ class PostActionMixin(object):
 
 class StaffRequiredMixin(object):
     """
-Mixin allows you to require a user with `is_superuser` set to True.
+Mixin allows you to require a user with `is_staff` set to True.
 """
+    #adapted from SuperuserRequiredMixin from braces.views
     login_url = settings.LOGIN_URL  # LOGIN_URL from project settings
     raise_exception = False  # Default whether to raise an exception to none
     redirect_field_name = REDIRECT_FIELD_NAME  # Set by django.contrib.auth
