@@ -48,6 +48,7 @@
             <ul class="nav">
               {% if user.is_staff %}
               <li class="active"><a href="{% url blog_post_new %}">Create Post</a></li>
+              <li class="active"><a href="{% url logout %}">Logout</a></li>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
