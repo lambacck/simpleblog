@@ -2,10 +2,14 @@ import json
 import datetime
 
 from django import forms, http
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth.views import redirect_to_login
+from django.conf import settings
 from django.contrib import messages
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.core.exceptions import PermissionDenied
 from django.template import Context, loader
 from django.utils.encoding import force_unicode
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from braces.views import LoginRequiredMixin
 
@@ -20,7 +24,28 @@ class PostActionMixin(object):
         return super(PostActionMixin, self).form_valid(form)
 
 
-class PostCreateView(LoginRequiredMixin, PostActionMixin, CreateView):
+class StaffRequiredMixin(object):
+    """
+Mixin allows you to require a user with `is_superuser` set to True.
+"""
+    login_url = settings.LOGIN_URL  # LOGIN_URL from project settings
+    raise_exception = False  # Default whether to raise an exception to none
+    redirect_field_name = REDIRECT_FIELD_NAME  # Set by django.contrib.auth
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:  # If the user is a standard user,
+            if self.raise_exception:  # *and* if an exception was desired
+                raise PermissionDenied  # return a forbidden response.
+            else:
+                return redirect_to_login(request.get_full_path(),
+                                         self.login_url,
+                                         self.redirect_field_name)
+
+        return super(StaffRequiredMixin, self).dispatch(request,
+            *args, **kwargs)
+
+
+class PostCreateView(LoginRequiredMixin, StaffRequiredMixin, PostActionMixin, CreateView):
     form = PostForm
     model = Post
     action = 'created'
@@ -31,7 +56,7 @@ class PostCreateView(LoginRequiredMixin, PostActionMixin, CreateView):
         return initial
 
 
-class PostUpdateView(LoginRequiredMixin, PostActionMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, StaffRequiredMixin, PostActionMixin, UpdateView):
     form = PostForm
     model = Post
     action = 'updated'
