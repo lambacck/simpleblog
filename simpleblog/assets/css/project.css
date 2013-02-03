@@ -30,3 +30,8 @@ textarea {
 .error {
     color: red;
 }
+
+#id_title, #id_slug {
+    width: 50%;
+    min-width: 206px;
+}

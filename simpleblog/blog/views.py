@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from django import forms, http
 from django.contrib import messages
@@ -23,6 +24,11 @@ class PostCreateView(LoginRequiredMixin, PostActionMixin, CreateView):
     form = PostForm
     model = Post
     action = 'created'
+
+    def get_initial(self):
+        initial = super(PostCreateView, self).get_initial()
+        initial['pub_date'] = datetime.date.today()
+        return initial
 
 
 class PostUpdateView(LoginRequiredMixin, PostActionMixin, UpdateView):
