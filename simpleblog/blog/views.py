@@ -81,7 +81,8 @@ class PostDetailView(DetailView):
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
-    queryset = Post.objects.order_by('-pub_date', '-modified')[:5]
+    queryset = Post.objects.order_by('-pub_date', '-modified')
+    paginate_by = 5
 
 
 class CommentCreateView(CreateView):

@@ -18,3 +18,4 @@ build
 *.log
 
 /simpleblog/assets/CACHE/
+/build/
