@@ -4,6 +4,7 @@ from django import forms, http
 from django.contrib import messages
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.template import Context, loader
+from django.utils.encoding import force_unicode
 
 from braces.views import LoginRequiredMixin
 
@@ -85,7 +86,7 @@ class CommentCreateView(CreateView):
         return self.get_json_response(
             json.dumps({
                 'success': False,
-                'errors': {k: v.as_ul() for k, v in form.errors.iteritems()}
+                'errors': {k: v.as_ul() if len(v) > 1 else force_unicode(v[0]) for k, v in form.errors.iteritems()}
             })
         )
 

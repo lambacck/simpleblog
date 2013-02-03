@@ -18,7 +18,7 @@
                     var messages;
 
                     if (!result.success) {
-                        self.showErrors(result.errors);
+                        validator.showErrors(result.errors);
                         return;
                     }
 
@@ -33,7 +33,7 @@
                     }))).insertBefore(self);
 
                     $(result.comment).insertBefore(new_comment_container).hide().show('slow');
-                    validator.resetForm();
+                    $('#id_body')[0].value = '';
                 },
                 function(error) {
                     if (console) {
