@@ -1,6 +1,6 @@
 import os
 
-from .wsgi import application as _application
+from simpleblog.wsgi import application as _application
 
 
 def application(environ, start_response):
