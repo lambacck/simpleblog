@@ -67,6 +67,9 @@
             slug_el = $('#id_slug').keyup(function() {
                 slug_changed = true;
             });
+            if (slug_el[0].value) {
+                slug_changed = true;
+            }
             title_el = $('#id_title').keyup(function() {
                 if (slug_changed) {
                     return;
