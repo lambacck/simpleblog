@@ -92,7 +92,7 @@ textarea {
 .post-body {
     margin-top: 1.5em;
 }
-.pub-date, .post-body, .comments, .comment-counts {
+.pub-date, .post-body, .comment, .comment-counts {
     margin-left: 10px;
 }
 
