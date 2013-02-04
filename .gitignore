@@ -19,3 +19,5 @@ build
 
 /simpleblog/assets/CACHE/
 /build/
+/simpleblog/static/
+/apache/secret-env-settings.conf

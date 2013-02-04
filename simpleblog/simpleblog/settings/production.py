@@ -46,7 +46,16 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 
 ########## DATABASE CONFIGURATION
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'simpleblog',
+        'USER': 'simpleblog',
+        'PASSWORD': environ['SIMPLEBLOG_DB_PASSWORD'],
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 ########## END DATABASE CONFIGURATION
 
 
@@ -60,3 +69,5 @@ CACHES = {}
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_env_setting('SECRET_KEY')
 ########## END SECRET CONFIGURATION
+
+COMPRESS_OFFLINE = True
