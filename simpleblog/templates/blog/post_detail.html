@@ -2,9 +2,9 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    {% include "blog/post.html" %}
-    <h4>Comments:</h4>
-    <div class="comments">
+    {% include "blog/post.html" with show_comment_count=0 %}
+    <div class="comments" id="comments">
+        <h3 class="ui-state-default blog-comments-title">Comments:</h3>
         {% for comment in comments %}
             {% include "blog/comment.html" with comment=comment %}
         {% endfor %}

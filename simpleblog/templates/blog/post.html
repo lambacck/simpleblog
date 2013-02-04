@@ -1,6 +1,6 @@
 {% load markup %}
 <article class="blog-post">
-    <h2 class='blog-post-title'><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+    <h1 class="blog-post-title ui-widget-header"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
     <small class="pub-date">{{ post.pub_date }}
         {% if user.is_staff %}
         | <a href="{% url blog_post_edit pk=post.id %}">edit</a>
@@ -9,5 +9,16 @@
     <div class="post-body">
         {{ post.body|markdown:"safe" }}
     </div>
+    {% if show_comment_count %}
+    <small class="comment-counts">
+        {% with comment_count=post.comment_set.count %}
+        {% if comment_count %}
+        <a href="{{post.get_absolute_url}}#comments">View {{comment_count}} comment{{ comment_count|pluralize }}</a> or <a href="{{post.get_absolute_url}}#new-comment">post one yourself.</a>
+        {% else %}
+        <a href="{{post.get_absolute_url}}#new-comment">Post a comment</a>
+        {% endif %}
+        {% endwith %}
+    </small>
+    {% endif %}
 </article>
 

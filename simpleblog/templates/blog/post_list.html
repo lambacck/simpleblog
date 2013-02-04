@@ -4,11 +4,25 @@
 {% block title %}Super Simple Blog{% endblock %}
 {% block content %}
     {% if post_list %}
+        {% if page_obj.has_previous %}
+            <ul class="pager top">
+            {% if page_obj.has_previous %}
+                <li class="previous">
+                    <a href="{% url blog_home %}?page={{ page_obj.previous_page_number }}">&larr; Newer</a>
+                </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li class="next">
+                    <a href="{% url blog_home %}?page={{ page_obj.next_page_number }}">Older &rarr;</a>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
         {% for post in post_list %}
-            {% include "blog/post.html" with post=post %}
+            {% include "blog/post.html" with post=post show_comment_count=1 %}
         {% endfor %}
         {% if page_obj.has_other_pages %}
-            <ul class="pager" style="margin-top: 20px;">
+            <ul class="pager">
             {% if page_obj.has_previous %}
                 <li class="previous">
                     <a href="{% url blog_home %}?page={{ page_obj.previous_page_number }}">&larr; Newer</a>
