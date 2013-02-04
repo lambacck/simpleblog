@@ -44,12 +44,9 @@ article, .comments {
     margin-top: 0.5em;
 }
 
-.picture, .comment-details {
+.picture {
     float: left;
-}
-
-.comment-details {
-    margin-left: 1em;
+    padding: 0 1em 1em 0;
 }
 
 .control-label {
