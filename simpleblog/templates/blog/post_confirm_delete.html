@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block title %}Edit Post{% endblock %}
+{% block content %}
+
+<h1>Are you sure your want to delete the post titled "{{post.title}}"?</h1>
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
+      <button type="submit" class="btn btn-primary">Delete It</button>
+</form>
+{% endblock %}
