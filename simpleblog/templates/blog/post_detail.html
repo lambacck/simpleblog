@@ -2,6 +2,23 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
+    <ul class="pager top">
+    {% with previous_link=post.get_previous_link %}
+    {% if previous_link %}
+        <li class="previous">
+            <a href="{{ previous_link }}">&larr; Newer</a>
+        </li>
+    {% endif %}
+    {% endwith %}
+    {% with next_link=post.get_next_link %}
+    {% if next_link %}
+        <li class="next">
+            <a href="{{ next_link }}">Older &rarr;</a>
+        </li>
+    {% endif %}
+    {% endwith %}
+    </ul>
+
     {% include "blog/post.html" with show_comment_count=0 %}
     <div class="comments" id="comments">
         <h3 class="ui-state-default blog-comments-title">Comments:</h3>
@@ -10,5 +27,21 @@
         {% endfor %}
         {% include "blog/new_comment_form.html" %}
     </div>
+    <ul class="pager">
+    {% with previous_link=post.get_previous_link %}
+    {% if previous_link %}
+        <li class="previous">
+            <a href="{{ previous_link }}">&larr; Newer</a>
+        </li>
+    {% endif %}
+    {% endwith %}
+    {% with next_link=post.get_next_link %}
+    {% if next_link %}
+        <li class="next">
+            <a href="{{ next_link }}">Older &rarr;</a>
+        </li>
+    {% endif %}
+    {% endwith %}
+    </ul>
 </div>
 {% endblock %}

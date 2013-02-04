@@ -1,4 +1,5 @@
 from django.db import models
+
 from model_utils.models import TimeStampedModel
 
 
@@ -14,6 +15,22 @@ class Post(TimeStampedModel, models.Model):
             'slug': self.slug,
         }
         return ('blog_post_detail', (), url_data)
+
+    def get_next_link(self):
+        try:
+            obj = self.get_next_by_pub_date()
+        except self.DoesNotExist:
+            return None
+
+        return obj.get_absolute_url()
+
+    def get_previous_link(self):
+        try:
+            obj = self.get_previous_by_pub_date()
+        except self.DoesNotExist:
+            return None
+
+        return obj.get_absolute_url()
 
 
 class Comment(TimeStampedModel, models.Model):
