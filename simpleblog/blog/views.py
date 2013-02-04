@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.template import Context, loader
 from django.utils.encoding import force_unicode
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
 
 from braces.views import LoginRequiredMixin
 
@@ -83,6 +83,12 @@ class PostListView(ListView):
     template_name = 'blog/post_list.html'
     queryset = Post.objects.order_by('-pub_date', '-created')
     paginate_by = 4
+
+
+class PostDeleteView(LoginRequiredMixin, StaffRequiredMixin, PostActionMixin, DeleteView):
+    model = Post
+    action = 'deleted'
+    success_url = '/'
 
 
 class CommentCreateView(CreateView):

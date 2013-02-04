@@ -27,6 +27,11 @@ urlpatterns = patterns('',
         name='blog_post_edit'
     ),
     url(
+        regex=r'^delete/(?P<pk>\d+)$',
+        view=views.PostDeleteView.as_view(),
+        name='blog_post_delete'
+    ),
+    url(
         regex=r'^newcomment$',
         view=views.CommentCreateView.as_view(),
         name='blog_comment_new'
